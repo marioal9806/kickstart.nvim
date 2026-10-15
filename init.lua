@@ -171,6 +171,15 @@ do
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
   vim.o.confirm = true
+
+  -- nvim-tree related options
+  -- see https://github.com/nvim-tree/nvim-tree.lua
+  -- disable netrw at the very start of your init.lua
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
+  -- optionally enable 24-bit colour
+  vim.opt.termguicolors = true
 end
 
 -- ============================================================
@@ -439,6 +448,14 @@ do
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
   require('todo-comments').setup { signs = false }
+
+  vim.pack.add({
+    { src = gh 'nvim-tree/nvim-tree.lua' }
+  })
+  require("nvim-tree").setup()
+  vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+  vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+
 
   -- [[ mini.nvim ]]
   --  A collection of various small independent plugins/modules
